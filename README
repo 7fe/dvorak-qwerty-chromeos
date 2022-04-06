@@ -1,1 +1,3 @@
 Add Dvorak Control Qwerty to Chrome OS under chrome://setting/languages
+
+There is a bug in Android apps currently that makes the keepboard shorcut work but also display the Qwerty Key.
