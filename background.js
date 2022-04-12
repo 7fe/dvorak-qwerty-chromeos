@@ -29,7 +29,7 @@ chrome.input.ime.onKeyEvent.addListener(function(engineID, keyData) {
           return true
         }
       }
-      if(chrome.input.ime.sendKeyEvents != undefined && m.includes(keyData.key) ){
+      else if(chrome.input.ime.sendKeyEvents != undefined && m.includes(keyData.key) ){
         chrome.input.ime.sendKeyEvents({"contextID": contextID, "keyData": [{key:keyData.key,code:keyData.code});
         return true;
       }
