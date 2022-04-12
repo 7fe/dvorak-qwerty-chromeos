@@ -28,6 +28,10 @@ chrome.input.ime.onKeyEvent.addListener(function(engineID, keyData) {
           chrome.input.ime.commitText({"contextID": contextID,"text": l[keyData.key]});
           return true
         }
+        else if(l[keyData.key.toLowerCase()]) {
+          chrome.input.ime.commitText({"contextID": contextID,"text": l[keyData.key].toUpperCase()});
+          return true;
+        }
       }
       else if(chrome.input.ime.sendKeyEvents != undefined && m.includes(keyData.key) ){
         chrome.input.ime.sendKeyEvents({"contextID": contextID, "keyData": [{key:keyData.key,code:keyData.code});
