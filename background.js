@@ -20,10 +20,15 @@ var l = {
 /* "a": "a", "A": "A", */ "s": "o", "S": "O", "d": "e", "D":"E", "f": "u", "F":"U","g":"i","G":"I","h":"d","H":"D","j":"h","J":"H","k":"t","K":"T","l":"n","L":"N",";":"s",":":"S","'":"-","\"":"_",
 "z": ";", "Z": ":", "x": "q", "X": "Q", "c": "j", "C":"J", "v": "k", "V":"K","b":"x","B":"X","n":"b","N":"B","m":"m","M":"M",",":"w","<":"W",".":"v",">":"V","/":"z","?":"Z"
 }
-var m = ["Backspace","Shift","Ctrl","Alt","Esc"];
-chrome.input.ime.onFocus.addListener(function(c) {contextID = c.contextID;});
+// var m = ["Backspace","Shift","Ctrl","Alt","Esc"];
+chrome.input.ime.onFocus.addListener((c)=>{contextID = c.contextID;});
+chrome.input.ime.onBlur.addListener(() => { contextID = 0;})
 chrome.input.ime.onKeyEvent.addListener(function(engineID, keyData) {
-      if (keyData.type == "keydown" && !(m.includes(keyData.key))) {
+      if (keyData.type == "keydown" && !m.ctrlKey && l[keyData.key]) {
+        chrome.input.ime.commitText({"contextID": contextID,"text": l[keyData.key]});
+        return true
+      }
+      /* if (keyData.type == "keydown" && !(m.includes(keyData.key))) {
         if (l[keyData.key]) {
           chrome.input.ime.commitText({"contextID": contextID,"text": l[keyData.key]});
           return true
@@ -36,6 +41,6 @@ chrome.input.ime.onKeyEvent.addListener(function(engineID, keyData) {
       else if(chrome.input.ime.sendKeyEvents != undefined && m.includes(keyData.key) ){
         chrome.input.ime.sendKeyEvents({"contextID": contextID, "keyData": [{key:keyData.key,code:keyData.code});
         return true;
-      }
+      } */
       return false;
 });
