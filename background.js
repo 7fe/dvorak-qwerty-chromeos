@@ -20,11 +20,11 @@ var l = {
 /* "a": "a", "A": "A", */ "s": "o", "S": "O", "d": "e", "D":"E", "f": "u", "F":"U","g":"i","G":"I","h":"d","H":"D","j":"h","J":"H","k":"t","K":"T","l":"n","L":"N",";":"s",":":"S","'":"-","\"":"_",
 "z": ";", "Z": ":", "x": "q", "X": "Q", "c": "j", "C":"J", "v": "k", "V":"K","b":"x","B":"X","n":"b","N":"B","m":"m","M":"M",",":"w","<":"W",".":"v",">":"V","/":"z","?":"Z"
 }
-// var m = ["Backspace","Shift","Ctrl","Alt","Esc"];
+//var m = ["Backspace","Shift","Ctrl","Alt","Esc"];
 chrome.input.ime.onFocus.addListener((c)=>{contextID = c.contextID;});
 chrome.input.ime.onBlur.addListener(() => { contextID = 0;})
 chrome.input.ime.onKeyEvent.addListener(function(engineID, keyData) {
-      if (keyData.type == "keydown" && !m.ctrlKey && l[keyData.key]) {
+      if (keyData.type == "keydown" && l[keyData.key]) {
         chrome.input.ime.commitText({"contextID": contextID,"text": l[keyData.key]});
         return true
       }
